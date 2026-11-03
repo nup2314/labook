@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block titulo %}Inicio · Labook Web{% endblock %}
+
+{% block contenido %}
+<section class="hero">
+  <h2>Labook interactivo</h2>
+  <p>Aprende HTML, Jinja, CSS, JavaScript y SQL.</p>
+</section>
+
+<div class="grid">
+  {% for sec in secciones %}
+  <a class="tarjeta-sec" href="{{ url_for('seccion', slug=sec.slug) }}" style="--c: {{ sec.color }}">
+    <span class="icono">{{ sec.icono }}</span>
+    <h3>{{ sec.titulo }}</h3>
+    <p>{{ sec.resumen }}</p>
+    <small>{{ sec.elementos | length }} conceptos · {{ sec.quiz | length }} preguntas</small>
+    <span class="mini" data-progreso="{{ sec.slug }}"></span>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

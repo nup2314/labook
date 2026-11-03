@@ -1,0 +1,210 @@
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --panel-2: #1c2230;
+  --borde: #30363d;
+  --texto: #e6edf3;
+  --suave: #8b949e;
+  --codigo-bg: #010409;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--texto);
+  display: flex;
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* ---------- Menú lateral ---------- */
+.sidebar {
+  width: 250px;
+  background: var(--panel);
+  border-right: 1px solid var(--borde);
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  flex-shrink: 0;
+}
+.logo { font-size: 1.2rem; margin-bottom: 24px; }
+.sidebar nav { display: flex; flex-direction: column; gap: 6px; }
+.sidebar a {
+  --c: #58a6ff;
+  color: var(--texto);
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border-left: 3px solid transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: .2s;
+}
+.sidebar a:hover { background: var(--panel-2); border-left-color: var(--c); }
+.sidebar a.activo { background: var(--panel-2); border-left-color: var(--c); font-weight: 600; }
+.mini { font-size: .75rem; color: #3fb950; }
+
+main { flex: 1; padding: 36px 48px; max-width: 1100px; }
+
+/* ---------- Inicio ---------- */
+.hero { margin-bottom: 32px; }
+.hero h2 { font-size: 2rem; margin-bottom: 8px; }
+.hero p { color: var(--suave); max-width: 650px; }
+.hero a { color: #58a6ff; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.tarjeta-sec {
+  --c: #58a6ff;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-top: 4px solid var(--c);
+  border-radius: 14px;
+  padding: 22px;
+  color: var(--texto);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform .2s, box-shadow .2s;
+}
+.tarjeta-sec:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+.tarjeta-sec p { color: var(--suave); font-size: .92rem; }
+.tarjeta-sec small { color: var(--c); }
+.icono { font-size: 2rem; }
+.icono.grande { font-size: 3rem; }
+
+/* ---------- Sección ---------- */
+.cabecera {
+  --c: #58a6ff;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-left: 5px solid var(--c);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.cabecera h2 { color: var(--c); margin-bottom: 6px; }
+.resumen { margin-bottom: 8px; }
+.detalle { color: var(--suave); font-size: .95rem; }
+
+.barra-busqueda { display: flex; gap: 10px; margin-bottom: 20px; }
+.barra-busqueda input {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  color: var(--texto);
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+}
+.barra-busqueda input:focus { border-color: #58a6ff; }
+.barra-busqueda button, .quiz button, .copiar {
+  background: var(--panel-2);
+  color: var(--texto);
+  border: 1px solid var(--borde);
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: .9rem;
+  transition: .2s;
+}
+.barra-busqueda button:hover, .copiar:hover { border-color: #58a6ff; }
+
+.lista { --c: #58a6ff; display: flex; flex-direction: column; gap: 10px; }
+
+.concepto {
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.concepto.abierto { border-color: var(--c); }
+.concepto-cab {
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--texto);
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.concepto-cab:hover { background: var(--panel-2); }
+.nombre { font-family: Consolas, "Courier New", monospace; color: var(--c); font-weight: 600; }
+.flecha { transition: transform .2s; color: var(--suave); }
+.concepto.abierto .flecha { transform: rotate(90deg); }
+.concepto-cuerpo { display: none; padding: 0 18px 18px; }
+.concepto.abierto .concepto-cuerpo { display: block; }
+.concepto-cuerpo > p { margin-bottom: 12px; color: var(--suave); }
+
+/* ---------- Código oscuro ---------- */
+.codigo { background: var(--codigo-bg); border: 1px solid var(--borde); border-radius: 10px; overflow: hidden; }
+.codigo-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0b0f16;
+  padding: 6px 12px;
+  color: var(--suave);
+  font-size: .8rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--borde);
+}
+.copiar { padding: 4px 12px; font-size: .78rem; }
+pre { padding: 16px; overflow-x: auto; font-family: Consolas, "Fira Code", monospace; font-size: .9rem; color: #c9d1d9; }
+
+.tk-com { color: #6e7681; font-style: italic; }
+.tk-str { color: #a5d6ff; }
+.tk-tag { color: #7ee787; }
+.tk-jin { color: #d2a8ff; }
+.tk-kw  { color: #ff7b72; }
+.tk-num { color: #79c0ff; }
+.tk-fn  { color: #ffa657; }
+
+/* ---------- Quiz ---------- */
+.quiz {
+  --c: #58a6ff;
+  margin-top: 36px;
+  background: var(--panel);
+  border: 1px solid var(--borde);
+  border-top: 4px solid var(--c);
+  border-radius: 14px;
+  padding: 24px;
+}
+.quiz h3 { margin-bottom: 16px; }
+.progreso-quiz { color: var(--suave); font-size: .85rem; margin-bottom: 8px; }
+.pregunta { font-size: 1.1rem; margin-bottom: 14px; }
+.opciones { display: grid; gap: 10px; }
+.opciones button { text-align: left; }
+.opciones button:hover:not(:disabled) { border-color: var(--c); }
+.opciones button.correcta { background: #12361f; border-color: #3fb950; }
+.opciones button.incorrecta { background: #3d1519; border-color: #f85149; }
+.quiz-sig { margin-top: 16px; background: var(--c) !important; color: #0d1117 !important; font-weight: 600; border: none !important; }
+.resultado { font-size: 1.2rem; }
+.resultado strong { color: var(--c); font-size: 1.6rem; }
+
+.paginacion { display: flex; justify-content: space-between; margin-top: 32px; }
+.paginacion a { color: #58a6ff; text-decoration: none; }
+.paginacion a:hover { text-decoration: underline; }
+
+@media (max-width: 800px) {
+  body { flex-direction: column; }
+  .sidebar { width: 100%; height: auto; position: static; }
+  .sidebar nav { flex-direction: row; flex-wrap: wrap; }
+  main { padding: 20px; }
+  .cabecera { flex-direction: column; }
+}

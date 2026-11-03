@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block titulo %}{{ s.titulo }} · Labook Web{% endblock %}
+
+{% block contenido %}
+<header class="cabecera" style="--c: {{ s.color }}">
+  <span class="icono grande">{{ s.icono }}</span>
+  <div>
+    <h2>¿Qué es {{ s.titulo }}?</h2>
+    <p class="resumen">{{ s.resumen }}</p>
+    <p class="detalle">{{ s.descripcion }}</p>
+  </div>
+</header>
+
+<div class="barra-busqueda">
+  <input id="buscador" type="search" placeholder="🔎 Buscar en {{ s.titulo }}..." autocomplete="off">
+  <button id="btn-abrir" type="button">Expandir todo</button>
+</div>
+
+<div class="lista" style="--c: {{ s.color }}">
+  {% for e in s.elementos %}
+  <article class="concepto">
+    <button class="concepto-cab" type="button">
+      <span class="nombre">{{ e.nombre }}</span>
+      <span class="flecha">▸</span>
+    </button>
+    <div class="concepto-cuerpo">
+      <p>{{ e.info }}</p>
+      <div class="codigo">
+        <div class="codigo-bar">
+          <span>{{ s.lenguaje }}</span>
+          <button class="copiar" type="button">Copiar</button>
+        </div>
+        <pre data-lang="{{ s.lenguaje }}"><code>{{ e.codigo }}</code></pre>
+      </div>
+    </div>
+  </article>
+  {% else %}
+  <p>No hay contenido.</p>
+  {% endfor %}
+  <p id="sin-resultados" hidden>Sin resultados para tu búsqueda.</p>
+</div>
+
+<section class="quiz" id="quiz" style="--c: {{ s.color }}" data-slug="{{ s.slug }}">
+  <h3> Pon a prueba tu conocimiento</h3>
+  <div id="quiz-contenido"></div>
+</section>
+<script id="quiz-data" type="application/json">{{ s.quiz | tojson }}</script>
+
+<nav class="paginacion">
+  {% if anterior %}<a href="{{ url_for('seccion', slug=anterior.slug) }}">← {{ anterior.titulo }}</a>{% else %}<span></span>{% endif %}
+  {% if siguiente %}<a href="{{ url_for('seccion', slug=siguiente.slug) }}">{{ siguiente.titulo }} →</a>{% endif %}
+</nav>
+{% endblock %}

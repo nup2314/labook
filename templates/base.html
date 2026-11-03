@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}Labook Web{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <aside class="sidebar">
+    <h1 class="logo"> Labook Web</h1>
+    <nav>
+      <a href="{{ url_for('inicio') }}" class="{{ 'activo' if actual is none }}">🏠 Inicio</a>
+      {% for sec in secciones %}
+        <a href="{{ url_for('seccion', slug=sec.slug) }}"
+           class="{{ 'activo' if actual == sec.slug }}"
+           style="--c: {{ sec.color }}">
+          {{ sec.icono }} {{ sec.titulo }}
+          <span class="mini" data-progreso="{{ sec.slug }}"></span>
+        </a>
+      {% endfor %}
+    </nav>
+  </aside>
+
+  <main>
+    {% block contenido %}{% endblock %}
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
